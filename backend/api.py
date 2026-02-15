@@ -1,9 +1,19 @@
-from fastapi import APIRouter, status # Add to existing imports
-from motor.motor_asyncio import AsyncIOMotorClient # Install 'motor' via pip
+from fastapi import FastAPI, HTTPException, status
+from motor.motor_asyncio import AsyncIOMotorClient
 from pydantic import BaseModel
+import logging
 
-# Initialize MongoDB Client using your provided URI
-# URI: mongodb+srv://<db_username>:<db_password>@cluster1.fzyqxao.mongodb.net/?appName=Cluster1
+# 1. IMPORT YOUR SETTINGS (Fixes the NameError)
+from backend.config import settings
+
+# Initialize logging
+logger = logging.getLogger("uvicorn")
+
+# 2. INITIALIZE APP
+app = FastAPI(title="HyperReach Local API")
+
+# 3. DATABASE CONNECTION
+# Uses the URI and DB Name from your config.py
 client = AsyncIOMotorClient(settings.MONGO_URI)
 db = client[settings.DB_NAME]
 
@@ -14,7 +24,7 @@ class LoginRequest(BaseModel):
 @app.post("/api/login", tags=["Auth"])
 async def login(request: LoginRequest):
     """
-    Verifies user credentials against MongoDB Cluster1
+    Verifies user credentials against MongoDB
     """
     try:
         # Search the 'users' collection for the matching username
@@ -30,6 +40,8 @@ async def login(request: LoginRequest):
             status_code=status.HTTP_401_UNAUTHORIZED,
             detail="Invalid username or password"
         )
+    except HTTPException:
+        raise
     except Exception as e:
         logger.error(f"❌ Database error: {e}")
         raise HTTPException(status_code=500, detail="Internal server error")
