@@ -1,0 +1,11 @@
+services:
+  - type: web
+    name: hyperreach-local
+    env: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: python -m backend.api
+    envVars:
+      - key: MONGO_URI
+        sync: false # Set your Cluster1 URI in the Render Dashboard
+      - key: DB_NAME
+        value: Cluster1
