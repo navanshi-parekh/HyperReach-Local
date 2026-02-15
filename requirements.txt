@@ -1,0 +1,15 @@
+fastapi
+
+uvicorn
+
+motor (for MongoDB connection)
+
+pydantic-settings
+
+torch
+
+transformers
+
+beautifulsoup4
+
+requests
