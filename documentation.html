@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Developer Docs | HyperReach Local</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="style.css">
+    
+    <style>
+        :root {
+            --primary-color: #6366f1; /* Indigo */
+            --secondary-color: #ec4899; /* Pink */
+            --sidebar-bg: #f9fafb;
+            --code-bg: #1e293b;
+        }
+        
+        body { 
+            background-color: #ffffff; 
+            font-family: 'Inter', sans-serif; 
+            color: #1f2937; 
+            scroll-behavior: smooth; 
+        }
+
+        /* Sidebar Orchestration */
+        .sidebar {
+            width: 280px;
+            height: calc(100vh - 70px);
+            position: sticky;
+            top: 70px;
+            background: var(--sidebar-bg);
+            border-right: 1px solid #e5e7eb;
+            padding: 2rem;
+            overflow-y: auto;
+        }
+
+        .nav-group-title {
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: #9ca3af;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .sidebar-link {
+            display: block;
+            padding: 0.5rem 0;
+            font-size: 0.9375rem;
+            color: #4b5563;
+            transition: all 0.2s;
+        }
+
+        .sidebar-link:hover { color: var(--primary-color); transform: translateX(4px); }
+
+        /* Main Content Styling */
+        .doc-content { flex: 1; padding: 4rem; max-width: 950px; }
+
+        .text-gradient {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Advanced Code Block Component */
+        .code-snippet {
+            background: var(--code-bg);
+            color: #e2e8f0;
+            padding: 1.5rem;
+            border-radius: 0.75rem;
+            font-family: 'Fira Code', monospace;
+            font-size: 0.875rem;
+            margin: 1.5rem 0;
+            position: relative;
+            overflow-x: auto;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+
+        .glass-note {
+            background: rgba(99, 102, 241, 0.05);
+            border-left: 4px solid var(--primary-color);
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            margin: 2rem 0;
+        }
+
+        h2 { font-size: 1.875rem; font-weight: 700; margin-top: 3.5rem; margin-bottom: 1.5rem; border-bottom: 1px solid #f3f4f6; padding-bottom: 0.5rem; }
+        h3 { font-size: 1.25rem; font-weight: 600; margin-top: 2rem; margin-bottom: 1rem; color: var(--primary-color); }
+        p { margin-bottom: 1.25rem; line-height: 1.75; color: #4b5563; }
+        
+        .step-pill {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 24px;
+            height: 24px;
+            background: var(--primary-color);
+            color: white;
+            border-radius: 50%;
+            font-size: 0.75rem;
+            margin-right: 0.5rem;
+        }
+
+        @media (max-width: 1024px) { .sidebar { display: none; } .doc-content { padding: 2rem; } }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="container mx-auto px-4">
+            <div class="navbar-content flex justify-between items-center py-4">
+                <div class="logo flex items-center gap-2">
+                    <span class="logo-icon text-2xl">🚀</span>
+                    <span class="logo-text font-bold text-xl">HyperReach Local</span>
+                </div>
+                <div class="nav-links flex gap-6 items-center">
+                    <a href="index.html" class="nav-link text-gray-600">Home</a>
+                    <a href="pricing.html" class="nav-link text-gray-600">Pricing</a>
+                    <a href="/chat" class="btn btn-primary">Launch App</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="flex">
+        <aside class="sidebar">
+            <div class="nav-group-title">Introduction</div>
+            <a href="#overview" class="sidebar-link">Project Overview</a>
+            
+            <div class="nav-group-title">Installation</div>
+            <a href="#prerequisites" class="sidebar-link">Prerequisites</a>
+            <a href="#manual-install" class="sidebar-link">Option 1: Manual</a>
+            <a href="#docker-install" class="sidebar-link">Option 2: Docker</a>
+            <a href="#windows-exe" class="sidebar-link">Option 3: Windows EXE</a>
+            
+            <div class="nav-group-title">Quick Start</div>
+            <a href="#cli-usage" class="sidebar-link">Using CLI</a>
+            <a href="#direct-python" class="sidebar-link">Using Direct Python</a>
+        </aside>
+
+        <main class="doc-content">
+            <section id="overview">
+                <h1 class="text-5xl font-bold mb-4 text-gradient">Installation Guide</h1>
+                <p class="text-xl text-gray-500 mb-8">Comprehensive steps to deploy your 100% offline outreach engine.</p>
+                <div class="glass-note">
+                    <strong>Hardware Guardrail:</strong> Ensure you have at least 8GB RAM. The 4-bit NF4 quantized engine requires ~4.5GB total runtime memory.
+                </div>
+            </section>
+
+            <section id="prerequisites">
+                <h2>Prerequisites</h2>
+                <p>Ensure these components are installed before proceeding:</p>
+                <ul class="grid md:grid-cols-2 gap-4 text-sm font-medium">
+                    <li class="p-3 border rounded-lg bg-gray-50 flex items-center gap-2">🐍 Python 3.11+</li>
+                    <li class="p-3 border rounded-lg bg-gray-50 flex items-center gap-2">🍃 MongoDB 5.0+</li>
+                    <li class="p-3 border rounded-lg bg-gray-50 flex items-center gap-2">🐳 Docker (Optional)</li>
+                    <li class="p-3 border rounded-lg bg-gray-50 flex items-center gap-2">🛠️ Git CLI</li>
+                </ul>
+            </section>
+
+            <section id="manual-install">
+                <h2>Option 1: Manual Installation</h2>
+                <p>Recommended for developers wanting deep control over the environment.</p>
+                
+                <h3><span class="step-pill">1</span> Clone & Navigate</h3>
+                <div class="code-snippet">
+                    git clone https://github.com/rahulkate173/Outreach-Engine-.git
+                    cd Outreach-Engine-
+                </div>
+
+                <h3><span class="step-pill">2</span> Environment Setup</h3>
+                <div class="code-snippet">
+                    # Create virtual environment
+                    python -m venv venv
+
+                    # Activate (Windows)
+                    venv\Scripts\activate
+
+                    # Activate (macOS/Linux)
+                    source venv/bin/activate
+                </div>
+
+                <h3><span class="step-pill">3</span> Dependencies & Folders</h3>
+                <div class="code-snippet">
+                    pip install -r requirements.txt
+                    
+                    # Create required model and memory directories
+                    mkdir -p models_cache memory
+                </div>
+
+                <h3><span class="step-pill">4</span> Configuration</h3>
+                <p>Link your MongoDB Cluster1 URI in the environment file.</p>
+                <div class="code-snippet">
+                    cp .env.example .env
+                    # Edit .env with your MONGO_URI and settings
+                </div>
+            </section>
+
+            <section id="docker-install">
+                <h2>Option 2: Docker Installation</h2>
+                <p>Deploy a containerized version of the FastAPI backend.</p>
+                <div class="code-snippet">
+                    # Build and start services
+                    docker-compose up -d
+
+                    # Monitor logs
+                    docker-compose logs -f fastapi
+                </div>
+            </section>
+
+            <section id="windows-exe">
+                <h2>Option 3: EXE (Windows)</h2>
+                <div class="code-snippet">
+                    # Build executable
+                    pyinstaller --onefile cli.py
+
+                    # Run from dist folder
+                    dist/cli.exe auth start
+                </div>
+            </section>
+
+            <section id="cli-usage">
+                <h2>Quick Start: Using CLI</h2>
+                <p>Interact with the system via our built-in command-line interface.</p>
+                <div class="code-snippet">
+                    # Start with authentication flow
+                    python cli.py auth
+
+                    # Start server directly
+                    python cli.py server
+
+                    # Reset local model cache
+                    python cli.py reset-model
+                </div>
+            </section>
+
+            <section id="direct-python">
+                <h2>Quick Start: Direct Python</h2>
+                <div class="code-snippet">
+                    # Start FastAPI directly via Uvicorn
+                    python -m uvicorn app.main:app --reload
+
+                    # Server running on: http://localhost:8000
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <footer class="footer py-12 bg-gray-900 text-white text-center border-t border-gray-800">
+        <div class="container mx-auto px-4">
+            <p class="text-sm text-gray-400 mb-4">
+                Developed for PICT Hackathon • Product: <strong class="text-white">HyperReach Local</strong>
+            </p>
+            <div class="footer-bottom pt-4">
+                <p>&copy; 2026 HyperReach Local. Powered by 4-bit NF4 Quantization.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        // Smooth sidebar scrolling logic
+        document.querySelectorAll('.sidebar-link').forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const targetId = link.getAttribute('href');
+                document.querySelector(targetId).scrollIntoView({ behavior: 'smooth' });
+            });
+        });
+    </script>
+</body>
+</html>

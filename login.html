@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login | HyperReach Local</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --primary: #6366f1; /* style.css Indigo */
+        --secondary: #ec4899; /* style.css Pink */
+        --bg-light: #ffffff; /* Requested White Background */
+        --border-color: #e5e7eb; /* style.css */
+      }
+      body {
+        background-color: var(--bg-light);
+        font-family: "Inter", sans-serif;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+        margin: 0;
+        background: linear-gradient(
+          135deg,
+          rgba(99, 102, 241, 0.05) 0%,
+          rgba(236, 72, 153, 0.05) 100%
+        ); /* Subtle tint from index.html */
+      }
+      /* Aligned Glassmorphism Panel for White Theme */
+      .glass-panel {
+        background: rgba(255, 255, 255, 0.8);
+        backdrop-filter: blur(12px);
+        border: 1px solid var(--border-color);
+        border-radius: 1.5rem;
+        width: 100%;
+        max-width: 450px;
+        padding: 3rem;
+        transition: all 0.3s ease;
+      }
+      .glass-panel:hover {
+        border-color: var(--primary);
+        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1); /* Aligned with style.css shadow-lg */
+      }
+      .text-gradient {
+        background: linear-gradient(
+          135deg,
+          var(--primary) 0%,
+          var(--secondary) 100%
+        );
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+      .input-field {
+        background: #f9fafb; /* Aligned with bg-secondary */
+        border: 1px solid var(--border-color);
+        color: #1f2937;
+        transition: all 0.3s ease;
+      }
+      .input-field:focus {
+        border-color: var(--primary);
+        outline: none;
+        box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+      }
+      .btn-gradient {
+        background: linear-gradient(
+          135deg,
+          var(--primary) 0%,
+          var(--secondary) 100%
+        );
+        color: white;
+        font-weight: 700;
+        transition:
+          transform 0.2s ease,
+          opacity 0.3s ease;
+      }
+      .btn-gradient:hover {
+        opacity: 0.9;
+        transform: translateY(-2px);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="glass-panel shadow-xl">
+      <div class="text-center mb-10">
+        <div
+          class="inline-block p-3 bg-indigo-500/10 rounded-2xl mb-4 border border-indigo-500/20"
+        >
+          <span class="text-2xl">🚀</span>
+        </div>
+        <h1 class="text-3xl font-bold text-gradient">HyperReach Local</h1>
+        <p class="text-gray-500 mt-2 text-sm leading-relaxed">
+          Sign in to your offline outreach engine.
+        </p>
+      </div>
+
+      <form action="/api/login" method="POST">
+        <div class="mb-5">
+          <label
+            class="block text-gray-700 text-xs font-bold uppercase tracking-widest mb-2"
+            >Username</label
+          >
+          <input
+            type="text"
+            name="username"
+            class="input-field w-full px-4 py-3 rounded-xl text-sm"
+            placeholder="Enter your username"
+            required
+          />
+        </div>
+        <div class="mb-8">
+          <div class="flex justify-between items-center mb-2">
+            <label
+              class="block text-gray-700 text-xs font-bold uppercase tracking-widest"
+              >Password</label
+            >
+            <a
+              href="#"
+              class="text-xs text-indigo-600 hover:text-indigo-500 transition"
+              >Forgot?</a
+            >
+          </div>
+          <input
+            type="password"
+            name="password"
+            class="input-field w-full px-4 py-3 rounded-xl text-sm"
+            placeholder="••••••••"
+            required
+          />
+        </div>
+        <button
+          type="submit"
+          class="btn-gradient w-full py-3.5 rounded-xl mb-6 shadow-lg"
+        >
+          Secure Login
+        </button>
+      </form>
+
+      <div class="text-center">
+        <p
+          class="text-gray-400 text-[10px] leading-relaxed uppercase tracking-widest"
+        >
+          Developed for PICT Hackathon • 100% Offline Inference
+        </p>
+        <div class="mt-6 flex justify-center gap-4">
+          <a
+            href="index.html"
+            class="text-xs text-gray-500 hover:text-indigo-600 transition"
+            >← Back to Home</a
+          >
+        </div>
+      </div>
+    </div>
+    <script src="login.js"></script>
+  </body>
+</html>
