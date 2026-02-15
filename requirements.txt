@@ -2,7 +2,7 @@ fastapi
 
 uvicorn
 
-motor (for MongoDB connection)
+motor
 
 pydantic-settings
 
